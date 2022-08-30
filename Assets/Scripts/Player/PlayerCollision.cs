@@ -6,7 +6,7 @@ public class PlayerCollision : MonoBehaviour
 {
     private PlayerData playerData;
     private PlayerMoveForce playerMove;
-
+  [SerializeField] WeaponManager weaponManager;
     private void Start()
     {
         playerData = GetComponent<PlayerData>();
@@ -72,6 +72,26 @@ public class PlayerCollision : MonoBehaviour
             */
             playerMove.MyRigidbody.AddForce((Vector3.up + Vector3.forward) * playerMove.MaxSpeed * 5f , ForceMode.VelocityChange);
         }
+        
+        if (other.gameObject.CompareTag("Weapons"))
+        {
+            // AGREGAR EL ARMA A LA LISTA DE ARMAS
+            other.gameObject.SetActive(false);
+            weaponManager.WeaponList.Add(other.gameObject);
+            //COLA
+            weaponManager.WeaponQueue.Enqueue(other.gameObject);
+            Debug.Log("ELEMENTOS EN LA COLA " + weaponManager.WeaponQueue.Count);
+            //STACK
+            weaponManager.WeaponStack.Push(other.gameObject);
+            Debug.Log("ELEMENTOS EN LA STACK " + weaponManager.WeaponStack.Count);
+            //DIC
+            if (!weaponManager.WeaponDirectory.ContainsKey(other.gameObject.name))
+            {
+                weaponManager.WeaponDirectory.Add(other.gameObject.name, other.gameObject);
+                Debug.Log(weaponManager.WeaponDirectory[other.gameObject.name]);
+            }
+        }
+        
     }
 
     private void OnTriggerExit(Collider other)

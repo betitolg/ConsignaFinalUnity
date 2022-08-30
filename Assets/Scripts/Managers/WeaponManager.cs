@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    // Start is called before the first frame update
+  
+     // Start is called before the first frame update
     // SOLO TENGO 3 ARMAS -> ES AGRUPAMIENTO FIJO
     [SerializeField] GameObject[] weapons;
 
