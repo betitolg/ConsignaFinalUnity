@@ -24,7 +24,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] Transform playerTransform;
 
     [SerializeField] Animator enemyAnimator;
- 
+
+
+    private bool isAttack = true;
     void Start()
     {
         
@@ -57,14 +59,14 @@ public class Enemy : MonoBehaviour
     private void RotateAroundPlayer()
     {
         // Puedo rotar antes de moverme para que el enemigo quede de frente al player (lo mire).
-        LookPlayer();
+       // LookPlayer();
         // Rotate Around permite "orbitar" al rededor de una posición.
         transform.RotateAround(playerTransform.position, Vector3.up, 5f * Time.deltaTime);
     }
 
     private void ChasePlayer()
     {
-        LookPlayer();
+       // LookPlayer();
         // Con la resta vectorial obtengo la dirección que me permite desplazarme hacia el player.
         Vector3 direction = (playerTransform.position - transform.position);
         // Uso la magnitude para avanzar solo hasta cierta distancia (y no superponer el enemigo)

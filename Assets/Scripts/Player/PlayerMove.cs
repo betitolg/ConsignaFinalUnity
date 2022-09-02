@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
     [Range(1f, 10f)]
     private float speed = 3f;
 
-    // Propiedad empleada para almacenar la rotacion de la camara en Y.
+  
     private float cameraAxisX = 0f;
 
 

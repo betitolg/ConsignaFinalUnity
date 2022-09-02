@@ -18,15 +18,5 @@ public class Cup : MonoBehaviour
         myRigidbody.AddForce(Vector3.forward * moveForce);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //ACTUALIZACION DE INPUTS
-    }
-
-    private void FixedUpdate()
-    {
-        //ACTUALIZACION DE FUERZA
-        //myRigidbody.AddForce(Vector3.forward * 100f);
-    }
+   
 }
