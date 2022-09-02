@@ -20,15 +20,11 @@ public class MainUI : MonoBehaviour
     
     public void OnClickPlay()
     {
-
         SceneManager.LoadScene("Level0");
-
     }
     
     public void OnResetScene()
     {
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-
     }
 }
