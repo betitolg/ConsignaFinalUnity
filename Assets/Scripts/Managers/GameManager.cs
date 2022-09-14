@@ -14,16 +14,23 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        Debug.Log("EJECUTANDO AWAKE");
+      
         if (instance == null)
         {   
             instance = this;
             Debug.Log(instance);
             score = 0;
+            PlayerCollision.OnChangeHP += SetScore;
             DontDestroyOnLoad(gameObject);
         }else
         {
             Destroy(gameObject);
         }
+    }
+    
+    private void SetScore(int newValue)
+    {
+        score += newValue * 200;
+
     }
 }

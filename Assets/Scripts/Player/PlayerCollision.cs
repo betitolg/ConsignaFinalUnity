@@ -1,13 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class PlayerCollision : MonoBehaviour
 {
     private PlayerData playerData;
     private PlayerMoveForce playerMove;
   [SerializeField] WeaponManager weaponManager;
-    private void Start()
+
+  public static event Action OnDead;
+  public static event Action<int> OnChangeHP;
+  
+  
+  
+  private void Start()
     {
         playerData = GetComponent<PlayerData>();
         playerMove = GetComponent<PlayerMoveForce>();
@@ -24,28 +30,31 @@ public class PlayerCollision : MonoBehaviour
 
             //SUMAS SCORE
             GameManager.Score++;
-            Debug.Log(GameManager.Score);
+           // Debug.Log(GameManager.Score);
         }
 
         if (other.gameObject.CompareTag("Munitions"))
         {
-            Debug.Log("ENTRANDO EN COLISION CON " + other.gameObject.name);
+          //  Debug.Log("ENTRANDO EN COLISION CON " + other.gameObject.name);
             playerData.Damage(other.gameObject.GetComponent<Munition>().DamagePoints);
+            PlayerCollision.OnChangeHP?.Invoke(playerData.HP);
             Destroy(other.gameObject);
             if (playerData.HP <= 0)
             {
-                Debug.Log("GAME OVER");
+               // Debug.Log("GAME OVER");
+                PlayerCollision.OnDead?.Invoke();
             }
 
             //RESTAS SCORE
             GameManager.Score--;
-            Debug.Log(GameManager.Score);
+            //Debug.Log(GameManager.Score);
         }
 
         if (other.gameObject.CompareTag("Floor"))
         {
             playerMove.CanJump = true;
         }
+     
     }
 
     private void OnCollisionExit(Collision other)
